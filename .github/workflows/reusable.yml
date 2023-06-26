@@ -9,10 +9,15 @@ on:
         default: World
         
     outputs:
-      current-time: ${{ steps.time.outputs.time }}
+      current-time:
+        description: 'The time when greeting.'
+        value: ${{ jobs.reusable-job.outputs.current-time }}
         
 jobs:
   reusable-job:
+    outputs:
+      current-time: ${{ steps.time.outputs.time }}
+        
     runs-on: ubuntu-latest
     steps:
       - name: Greet someone
